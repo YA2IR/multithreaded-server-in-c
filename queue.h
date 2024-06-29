@@ -1,7 +1,4 @@
 
-#ifndef QUEUE_H
-#define QUEUE_H
-
 #include <pthread.h>
 
 #define EMPTY -1
@@ -19,6 +16,4 @@ typedef struct {
 queue_t* init_queue();
 void enqueue(queue_t* q, int cd);
 int dequeue(queue_t* q);
-
-#endif /* QUEUE_H */
 
