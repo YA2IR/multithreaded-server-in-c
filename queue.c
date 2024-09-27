@@ -1,7 +1,8 @@
+#include "queue.h"
+
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "queue.h"
 
 queue_t* init_queue() {
     queue_t* q = malloc(sizeof(queue_t));
@@ -15,7 +16,6 @@ void enqueue(queue_t* q, int cd) {
     new_node->cd = cd;
     new_node->next = NULL;
 
-
     if (q->tail == NULL) {
         q->head = new_node;
         q->tail = new_node;
@@ -23,28 +23,18 @@ void enqueue(queue_t* q, int cd) {
         q->tail->next = new_node;
         q->tail = new_node;
     }
-
 }
 
 int dequeue(queue_t* q) {
-
-    if (q->head == NULL) {
-        return EMPTY;
-    }
+    if (q->head == NULL) return EMPTY;
 
     int tmp = q->head->cd;
     node* tmp_node = q->head;
 
-    if (q->head == q->tail) {
-        q->head = NULL;
-        q->tail = NULL;
-    } else {
-        q->head = q->head->next;
-    }
+    q->head = q->head->next;
+    if (q->head == NULL) q->tail = NULL;
 
     free(tmp_node);
 
     return tmp;
 }
-
-
